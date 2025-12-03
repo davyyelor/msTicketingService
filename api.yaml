@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Ticketing Service API
+  version: 1.0.0
+  description: API para la compra, gestión y consulta de billetes.
+
+paths:
+  /tickets/purchase:
+    post:
+      summary: Compra un billete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, routeId, date]
+              properties:
+                userId: { type: string }
+                routeId: { type: string }
+                date: { type: string }
+      responses:
+        "201":
+          description: Ticket generado correctamente
+
+  /tickets/{ticketId}:
+    get:
+      summary: Obtener un billete por ID
+      parameters:
+        - in: path
+          name: ticketId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Billete encontrado }
+
+  /tickets/user/{userId}:
+    get:
+      summary: Obtener los billetes de un usuario
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Lista de billetes }
+
+  /tickets/{ticketId}/refund:
+    post:
+      summary: Solicitar reembolso
+      responses:
+        "200": { description: Reembolso procesado }
+
+  /tickets/search:
+    get:
+      summary: Buscar billetes
+      parameters:
+        - in: query
+          name: origin
+          schema: { type: string }
+        - in: query
+          name: destination
+          schema: { type: string }
+        - in: query
+          name: date
+          schema: { type: string }
+      responses:
+        "200": { description: Resultados disponibles }
