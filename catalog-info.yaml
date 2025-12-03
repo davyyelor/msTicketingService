@@ -1,19 +1,43 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: msTicketingService
-  description: "Servicio generado con el template Spring Boot Clean Architecture"
+  name: ms-ticketing-service
+  description: Servicio de compra y gestión de billetes.
   tags:
     - java
     - springboot
-    - clean-architecture
+    - ticketing
+    - sales
+  annotations:
+    github.com/project-slug: davyyelor/ms-ticketing-service
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   lifecycle: production
-  owner: user:davidelorzag
+  system: sistema-ticketing
+  owner: group:team-ticketing
+  providesApis:
+    - ms-ticketing-service-api
 
-  # URL del repositorio generado automáticamente
   links:
-    - url: https://github.com/davyyelor/msTicketingService
+    - url: https://github.com/davyyelor/ms-ticketing-service
       title: Repositorio GitHub
       icon: github
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ms-ticketing-service-api
+  description: API REST para compra y gestión de billetes.
+  tags:
+    - openapi
+    - ticketing
+  annotations:
+    backstage.io/openapi-ref: ./api.yaml
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:team-ticketing
+  system: sistema-ticketing
+  definition:
+    $text: ./api.yaml
