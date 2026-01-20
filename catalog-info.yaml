@@ -15,7 +15,7 @@ spec:
   type: service
   lifecycle: production
   system: websphere
-  owner: group:developers
+  owner: group:sistemas
   providesApis:
     - ms-ticketing-service-api
 
@@ -37,8 +37,9 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: group:developers
+  owner: group:sistemas
   system: websphere
   definition:
     $text: ./api.yaml
+
 
